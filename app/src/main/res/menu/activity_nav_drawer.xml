@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_verify"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Verify" />
+        <item
+            android:id="@+id/nav_report"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Report Counterfeit" />
+        <item
+            android:id="@+id/nav_view_products"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="View Registerd Products" />
+        <item
+            android:id="@+id/nav_news"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Latest News" />
+    </group>
+
+    <item android:title="others">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Settings " />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_menu_send"
+                android:title="About" />
+        </menu>
+    </item>
+
+</menu>
