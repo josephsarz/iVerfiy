@@ -16,7 +16,7 @@ public class Report {
     String lga;
     String town;
 
-    public Report(String productName, String productType, String storeLocation, String complainDetails, String complaintName, String complaintPhoneNo, String complaintEmail, String state, String lga, String town) {
+    public Report(String productName, String productType, String storeLocation, String complainDetails, String complaintName, String complaintPhoneNo) {
         this.productName = productName;
         this.productType = productType;
         this.storeLocation = storeLocation;

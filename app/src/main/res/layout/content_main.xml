@@ -11,26 +11,11 @@
     tools:context="com.codegene.femicodes.cscproject.MainActivity"
     tools:showIn="@layout/activity_main">
 
-
-    <android.support.design.widget.TextInputLayout
+    <FrameLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/nafdac_number_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter_unique_no"
-            android:imeOptions="actionDone" />
-    </android.support.design.widget.TextInputLayout>
-
-    <Button
-        android:id="@+id/nafdac_number_search_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="@string/verify"
-        android:textColor="#fff" />
-
+    </FrameLayout>
 
 </LinearLayout>

@@ -10,15 +10,23 @@ public class Product {
     String productType;
     String nafdacNumber;
     String imageUrl;
+    String manufacturerName;
+    String batchNumber;
+    String manufacturingDate;
+    String expiringDate;
 
     public Product() {
     }
 
-    public Product(String productName, String productType, String nafdacNumber, String imageUrl) {
+    public Product(String productName, String productType, String nafdacNumber, String imageUrl, String manufacturerName, String batchNumber, String manufacturingDate, String expiringDate) {
         this.productName = productName;
         this.productType = productType;
         this.nafdacNumber = nafdacNumber;
         this.imageUrl = imageUrl;
+        this.manufacturerName = manufacturerName;
+        this.batchNumber = batchNumber;
+        this.manufacturingDate = manufacturingDate;
+        this.expiringDate = expiringDate;
     }
 
     public String getProductName() {
@@ -51,5 +59,37 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getManufacturerName() {
+        return manufacturerName;
+    }
+
+    public void setManufacturerName(String manufacturerName) {
+        this.manufacturerName = manufacturerName;
+    }
+
+    public String getBatchNumber() {
+        return batchNumber;
+    }
+
+    public void setBatchNumber(String batchNumber) {
+        this.batchNumber = batchNumber;
+    }
+
+    public String getManufacturingDate() {
+        return manufacturingDate;
+    }
+
+    public void setManufacturingDate(String manufacturingDate) {
+        this.manufacturingDate = manufacturingDate;
+    }
+
+    public String getExpiringDate() {
+        return expiringDate;
+    }
+
+    public void setExpiringDate(String expiringDate) {
+        this.expiringDate = expiringDate;
     }
 }
