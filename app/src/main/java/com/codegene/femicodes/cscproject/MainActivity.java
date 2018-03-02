@@ -1,7 +1,7 @@
 package com.codegene.femicodes.cscproject;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -12,13 +12,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.codegene.femicodes.cscproject.fragment.AboutFragment;
 import com.codegene.femicodes.cscproject.fragment.NewsFragment;
 import com.codegene.femicodes.cscproject.fragment.ProductsFragment;
 import com.codegene.femicodes.cscproject.fragment.ReportFragment;
+import com.codegene.femicodes.cscproject.fragment.SettingsFragment;
 import com.codegene.femicodes.cscproject.fragment.VerifyFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +35,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mAuth = FirebaseAuth.getInstance();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -82,12 +93,11 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_settings) {
 
-            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+            fragment = new SettingsFragment();
 
         } else if (id == R.id.nav_about) {
 
-            startActivity(new Intent(MainActivity.this, AboutActivity.class));
-
+            fragment = new AboutFragment();
         }
 
         //replacing the fragment
@@ -100,4 +110,36 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
+
+    public void signAnonymousUserIn() {
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+
+                            AppUtils.showToast(getApplicationContext(), "Authentication Successful.");
+                        } else {
+                            AppUtils.showToast(getApplicationContext(), "Authentication failed.");
+
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            signAnonymousUserIn();
+        } else {
+            AppUtils.showToast(getApplicationContext(), "Signed In");
+        }
+    }
+
 }

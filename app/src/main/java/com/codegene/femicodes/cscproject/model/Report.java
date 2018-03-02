@@ -5,39 +5,24 @@ package com.codegene.femicodes.cscproject.model;
  */
 
 public class Report {
-    String productName;
-    String productType;
-    String storeLocation;
-    String complainDetails;
-    String complaintName;
-    String complaintPhoneNo;
-    String complaintEmail;
-    String state;
-    String lga;
-    String town;
+    private String productName;
+    private String productType;
+    private String storeLocation;
+    private String complainDetails;
+    private String complaintName;
+    private String complaintPhoneNo;
+    private String dateOfComplain;
+    private String nafdacNumber;
 
-    public Report(String productName, String productType, String storeLocation, String complainDetails, String complaintName, String complaintPhoneNo) {
+    public Report(String productName, String productType, String nafdacNumber, String storeLocation, String complainDetails, String complaintName, String complaintPhoneNo, String dateOfComplain) {
         this.productName = productName;
         this.productType = productType;
         this.storeLocation = storeLocation;
         this.complainDetails = complainDetails;
         this.complaintName = complaintName;
         this.complaintPhoneNo = complaintPhoneNo;
-        this.complaintEmail = complaintEmail;
-        this.state = state;
-        this.lga = lga;
-        this.town = town;
-    }
-
-    public Report(String productName, String productType, String storeLocation, String complainDetails, String complaintName, String state, String lga, String town) {
-        this.productName = productName;
-        this.productType = productType;
-        this.storeLocation = storeLocation;
-        this.complainDetails = complainDetails;
-        this.complaintName = complaintName;
-        this.state = state;
-        this.lga = lga;
-        this.town = town;
+        this.nafdacNumber = nafdacNumber;
+        this.dateOfComplain = dateOfComplain;
     }
 
     public String getProductName() {
@@ -88,35 +73,19 @@ public class Report {
         this.complaintPhoneNo = complaintPhoneNo;
     }
 
-    public String getComplaintEmail() {
-        return complaintEmail;
+    public String getDateOfComplain() {
+        return dateOfComplain;
     }
 
-    public void setComplaintEmail(String complaintEmail) {
-        this.complaintEmail = complaintEmail;
+    public void setDateOfComplain(String dateOfComplain) {
+        this.dateOfComplain = dateOfComplain;
     }
 
-    public String getState() {
-        return state;
+    public String getNafdacNumber() {
+        return nafdacNumber;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getLga() {
-        return lga;
-    }
-
-    public void setLga(String lga) {
-        this.lga = lga;
-    }
-
-    public String getTown() {
-        return town;
-    }
-
-    public void setTown(String town) {
-        this.town = town;
+    public void setNafdacNumber(String nafdacNumber) {
+        this.nafdacNumber = nafdacNumber;
     }
 }

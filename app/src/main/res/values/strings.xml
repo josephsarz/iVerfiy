@@ -3,6 +3,26 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_result">ResultActivity</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
+
+    <string name="app_intro_skip">Skip</string>
+
+    <string name="enter_unique_no">enter unique no</string>
+    <string name="verify">Verify</string>
+    <string name="report">Report Fake/ Conterfeit</string>
+    <string name="title_activity_report">ReportActivity</string>
+    <string name="title_activity_nav">NavActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_all_products">AllProductsActivity</string>
+    <string name="title_activity_news_update">News Update</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search</string>
+    <string name="title_activity_news_detail">NewsDetailActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -92,19 +112,4 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="enter_unique_no">enter unique no</string>
-    <string name="verify">Verify</string>
-    <string name="report">Report Fake/ Conterfeit</string>
-    <string name="title_activity_report">ReportActivity</string>
-    <string name="title_activity_nav">NavActivity</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_all_products">AllProductsActivity</string>
-    <string name="title_activity_news_update">News Update</string>
-    <string name="title_activity_settings">SettingsActivity</string>
-    <string name="title_activity_about">AboutActivity</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

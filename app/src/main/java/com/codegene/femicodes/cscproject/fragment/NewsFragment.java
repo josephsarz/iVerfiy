@@ -2,6 +2,7 @@ package com.codegene.femicodes.cscproject.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,8 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.codegene.femicodes.cscproject.Constants;
+import com.codegene.femicodes.cscproject.NewsDetailActivity;
 import com.codegene.femicodes.cscproject.R;
 import com.codegene.femicodes.cscproject.model.Post;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -21,20 +23,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class NewsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private DatabaseReference mDatabase;
 
-
     public NewsFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,13 +38,11 @@ public class NewsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
-
         //initialize recyclerview and FIrebase objects
         recyclerView = view.findViewById(R.id.news_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("news");
-
+        mDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.REFERENCE_CHILD_NEWS);
 
         return view;
     }
@@ -69,16 +63,19 @@ public class NewsFragment extends Fragment {
                 mDatabase
         ) {
             @Override
-            protected void populateViewHolder(NewsViewHolder viewHolder, Post model, int position) {
-                final String post_key = getRef(position).getKey().toString();
+            protected void populateViewHolder(NewsViewHolder viewHolder, final Post model, int position) {
+                final String post_key = getRef(position).getKey();
                 viewHolder.setTitle(model.getTitle());
-                viewHolder.setDesc(model.getDesc());
+                viewHolder.setDesc(model.getContent());
                 viewHolder.setImageUrl(getContext(), model.getImageUrl());
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        Toast.makeText(getContext(), post_key, Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getContext(), NewsDetailActivity.class);
+                        intent.putExtra("newsContent", model.getContent());
+                        intent.putExtra("imageUrl", model.getImageUrl());
+                        startActivity(intent);
 
                     }
                 });

@@ -1,20 +1,35 @@
 package com.codegene.femicodes.cscproject.model;
 
-/**
- * Created by EKENE on 11/4/2017.
- */
-
 public class Post {
 
-    private String title, desc, imageUrl;
-
-    public Post(String title, String desc, String imageUrl) {
-        this.title = title;
-        this.desc = desc;
-        this.imageUrl = imageUrl;
-    }
+    private String title, content, imageUrl, date, authorId;
 
     public Post() {
+    }
+
+    public Post(String title, String content, String imageUrl, String date, String authorId) {
+        this.title = title;
+        this.content = content;
+        this.imageUrl = imageUrl;
+        this.date = date;
+        this.authorId = authorId;
+    }
+
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getImageUrl() {
@@ -25,20 +40,19 @@ public class Post {
         this.imageUrl = imageUrl;
     }
 
-    public String getTitle() {
-        return title;
+    public String getDate() {
+        return date;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
-
 }

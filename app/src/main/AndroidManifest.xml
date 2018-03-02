@@ -3,6 +3,10 @@
     package="com.codegene.femicodes.cscproject">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:name=".AppController"
@@ -24,22 +28,15 @@
         </activity>
         <activity android:name=".ScanActivity" />
         <activity
-            android:name=".ResultActivity"
+            android:name=".ProductDetailsActivity"
             android:label="@string/title_activity_result"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.codegene.femicodes.cscproject.MainActivity" />
-        </activity>
+            android:name=".MyIntro"
+            android:theme="@style/FullscreenTheme" />
         <activity
-            android:name=".AboutActivity"
-            android:label="@string/title_activity_about"
+            android:name=".NewsDetailActivity"
+            android:label="@string/title_activity_news_detail"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-public class ResultActivity extends AppCompatActivity {
+public class ProductDetailsActivity extends AppCompatActivity {
 
     String productName;
     String nafdacNumber;
@@ -66,7 +66,7 @@ public class ResultActivity extends AppCompatActivity {
         mBatchNumber.setText(batchNumber);
         mManufacturingDate.setText(manufacturingDate);
         mExpiringDate.setText(expiringDate);
-        Picasso.with(ResultActivity.this)
+        Picasso.with(ProductDetailsActivity.this)
                 .load(imageUrl)
                 .placeholder(R.drawable.drugimage)
                 .error(R.drawable.drugimage)

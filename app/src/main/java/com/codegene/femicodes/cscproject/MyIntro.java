@@ -6,9 +6,6 @@ import android.widget.Toast;
 
 import com.github.paolorotolo.appintro.AppIntro;
 
-/**
- * Created by HP on 10/23/2016.
- */
 public class MyIntro extends AppIntro {
     // Please DO NOT override onCreate. Use init
     @Override

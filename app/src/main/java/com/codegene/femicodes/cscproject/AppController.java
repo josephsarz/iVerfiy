@@ -45,7 +45,7 @@ public class AppController extends Application {
                 if (isFirstStart) {
 
                     //  Launch application introduction screen
-                    Intent i = new Intent(mcontext, MyIntro.class);
+                    Intent i = new Intent(AppController.this, MyIntro.class);
                     startActivity(i);
                     SharedPreferences.Editor e = getSharedPreferences.edit();
                     e.putBoolean("firstStart", false);
@@ -56,4 +56,5 @@ public class AppController extends Application {
         t.start();
 
     }
+
 }

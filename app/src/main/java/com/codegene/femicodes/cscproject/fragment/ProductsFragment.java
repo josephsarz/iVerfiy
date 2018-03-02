@@ -8,30 +8,36 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.codegene.femicodes.cscproject.Constants;
+import com.codegene.femicodes.cscproject.ProductDetailsActivity;
 import com.codegene.femicodes.cscproject.R;
-import com.codegene.femicodes.cscproject.ResultActivity;
 import com.codegene.femicodes.cscproject.model.Product;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.squareup.picasso.Picasso;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ProductsFragment extends Fragment {
 
-    final static String REFERENCE_CHILD = "products";
+    String SearchString = "";
+    ProgressBar mProgress;
     private RecyclerView recyclerView;
     private DatabaseReference mDatabase;
-
 
     public ProductsFragment() {
         // Required empty public constructor
@@ -48,9 +54,10 @@ public class ProductsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.browse_products_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child(REFERENCE_CHILD);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.REFERENCE_CHILD_PRODUCTS);
+        mProgress = view.findViewById(R.id.progressbar_product_list);
 
-
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -64,6 +71,9 @@ public class ProductsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Query mQuerySearch = mDatabase.orderByChild("productName").equalTo("panadol");
+
+        mProgress.setVisibility(View.VISIBLE);
         FirebaseRecyclerAdapter<Product, ProductsViewHolder> FBRA = new FirebaseRecyclerAdapter<Product, ProductsViewHolder>(
                 Product.class,
                 R.layout.browse_all_product_item,
@@ -72,6 +82,7 @@ public class ProductsFragment extends Fragment {
         ) {
             @Override
             protected void populateViewHolder(ProductsViewHolder viewHolder, final Product model, int position) {
+                mProgress.setVisibility(View.INVISIBLE);
                 final String product_key = getRef(position).getKey().toString();
                 viewHolder.setProductName(model.getProductName());
                 // viewHolder.setNafdacNumber(model.getNafdacNumber());
@@ -80,7 +91,7 @@ public class ProductsFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
 
-                        Intent intent = new Intent(getContext(), ResultActivity.class);
+                        Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
                         intent.putExtra("productName", model.getProductName());
                         intent.putExtra("productType", model.getProductType());
                         intent.putExtra("imageUrl", model.getImageUrl());
@@ -96,6 +107,33 @@ public class ProductsFragment extends Fragment {
             }
         };
         recyclerView.setAdapter(FBRA);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_search, menu);
+
+        MenuItem myActionMenuItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) myActionMenuItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (TextUtils.isEmpty(newText)) {
+                    SearchString = "";
+                } else {
+                    // adapter.filter(newText);
+                    SearchString = newText;
+                    Toast.makeText(getContext(), newText, Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+
     }
 
     public static class ProductsViewHolder extends RecyclerView.ViewHolder {

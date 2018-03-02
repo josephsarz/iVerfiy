@@ -1,23 +1,22 @@
 package com.codegene.femicodes.cscproject.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.codegene.femicodes.cscproject.Constants;
+import com.codegene.femicodes.cscproject.ProductDetailsActivity;
 import com.codegene.femicodes.cscproject.R;
-import com.codegene.femicodes.cscproject.ResultActivity;
 import com.codegene.femicodes.cscproject.ScanActivity;
 import com.codegene.femicodes.cscproject.model.Product;
 import com.google.firebase.database.ChildEventListener;
@@ -30,13 +29,13 @@ import com.google.firebase.database.Query;
 
 public class VerifyFragment extends Fragment {
 
-    final static String REFERENCE_CHILD = "products";
+    // final static String REFERENCE_CHILD = "products";
     Button mSearchNafdacNumberBtn;
     EditText mNafdacNumberEditText;
     CoordinatorLayout layout;
     DatabaseReference myRef;
     Product product;
-    ProgressBar mProgress;
+    ProgressDialog progressDialog;
 
 
     public VerifyFragment() {
@@ -51,9 +50,8 @@ public class VerifyFragment extends Fragment {
 
         layout = view.findViewById(R.id.coordinator_layout);
 
-        myRef = FirebaseDatabase.getInstance().getReference(REFERENCE_CHILD);
+        myRef = FirebaseDatabase.getInstance().getReference(Constants.REFERENCE_CHILD_PRODUCTS);
         mNafdacNumberEditText = view.findViewById(R.id.nafdac_number_edittext);
-        mProgress = view.findViewById(R.id.progress_bar);
 
 
         mSearchNafdacNumberBtn = view.findViewById(R.id.nafdac_number_search_button);
@@ -62,12 +60,7 @@ public class VerifyFragment extends Fragment {
             public void onClick(View view) {
                 String code = mNafdacNumberEditText.getText().toString().trim();
                 // close the activity in case of empty barcode
-                if (TextUtils.isEmpty(code)) {
-                    Snackbar snackbar = Snackbar
-                            .make(layout, "field is empty!", Snackbar.LENGTH_LONG);
-                    snackbar.show();
-                } else {
-                    mProgress.setVisibility(View.VISIBLE);
+                if (validate(mNafdacNumberEditText)) {
                     FindItem(code);
                 }
             }
@@ -84,6 +77,16 @@ public class VerifyFragment extends Fragment {
         return view;
     }
 
+    private boolean validate(EditText editText) {
+        // check the lenght of the enter data in EditText and give error if its empty
+        if (editText.getText().toString().trim().length() > 0) {
+            return true; // returs true if field is not empty
+        }
+        editText.setError("Please Fill This");
+        editText.requestFocus();
+        return false;
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -91,7 +94,12 @@ public class VerifyFragment extends Fragment {
     }
 
     public void FindItem(String value) {
-        Toast.makeText(getContext(), "Searching", Toast.LENGTH_LONG).show();
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Searching..."); // Setting Message
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+        progressDialog.show(); // Display Progress Dialog
+        progressDialog.setCancelable(false);
+        //  Toast.makeText(getContext(), "Searching", Toast.LENGTH_LONG).show();
         String child = "nafdacNumber";
 
         Query query = myRef.orderByChild(child).equalTo(value);
@@ -100,13 +108,12 @@ public class VerifyFragment extends Fragment {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 product = dataSnapshot.getValue(Product.class);
 
+                progressDialog.dismiss();
                 if (product != null) {
-
-                    mProgress.setVisibility(View.VISIBLE);
 
                     Toast.makeText(getContext(), product.getManufacturerName(), Toast.LENGTH_LONG).show();
 
-                    Intent intent = new Intent(getContext(), ResultActivity.class);
+                    Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
                     intent.putExtra("productName", product.getProductName());
                     intent.putExtra("productType", product.getProductType());
                     intent.putExtra("imageUrl", product.getImageUrl());
@@ -136,12 +143,12 @@ public class VerifyFragment extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                mProgress.setVisibility(View.VISIBLE);
+                progressDialog.dismiss();
                 Toast.makeText(getContext(), "Item not found: " + databaseError, Toast.LENGTH_LONG).show();
             }
         });
 
-        mProgress.setVisibility(View.VISIBLE);
+        progressDialog.dismiss();
     }
 
 

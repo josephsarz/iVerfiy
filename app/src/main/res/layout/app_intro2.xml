@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_weight="10"
-    android:background="#03a373"
+    android:background="#E91E63"
     android:orientation="vertical">
 
     <TextView
@@ -15,7 +15,7 @@
         android:gravity="center"
         android:paddingLeft="32dp"
         android:paddingRight="29dp"
-        android:text="Amazing Features"
+        android:text="Report Counterfeit "
         android:textColor="#ffffff"
         android:textSize="27sp"
         android:textStyle="bold" />
@@ -44,7 +44,7 @@
         android:gravity="center"
         android:paddingLeft="64dp"
         android:paddingRight="64dp"
-        android:text="50+ amazing features and it's 100% free to use."
+        android:text=""
         android:textColor="#ffffff"
         android:textSize="16sp" />
 

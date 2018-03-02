@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_weight="10"
-    android:background="#0385a3"
+    android:background="#455A64"
     android:orientation="vertical">
 
     <TextView
@@ -15,7 +15,7 @@
         android:gravity="center"
         android:paddingLeft="32dp"
         android:paddingRight="29dp"
-        android:text="Welcome to AppIntro"
+        android:text="Authenticate Products"
         android:textColor="#ffffff"
         android:textSize="27sp"
         android:textStyle="bold" />
@@ -27,15 +27,13 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        //image link from drawable folder
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:src="@drawable/intro1" />
+            android:src="@drawable/intro3" />
     </LinearLayout>
 
     <TextView
@@ -46,7 +44,7 @@
         android:gravity="center"
         android:paddingLeft="64dp"
         android:paddingRight="64dp"
-        android:text="Amazing android app with cool features."
+        android:text=""
         android:textColor="#ffffff"
         android:textSize="16sp" />
 

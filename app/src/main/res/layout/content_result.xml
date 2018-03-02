@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:padding="16dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.codegene.femicodes.cscproject.ResultActivity"
+    tools:context="com.codegene.femicodes.cscproject.ProductDetailsActivity"
     tools:showIn="@layout/activity_result">
 
 

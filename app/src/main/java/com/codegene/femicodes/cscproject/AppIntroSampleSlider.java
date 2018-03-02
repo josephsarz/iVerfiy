@@ -13,7 +13,7 @@ import android.view.ViewGroup;
  */
 public class AppIntroSampleSlider extends Fragment {
     //Layout id
-    private static final String ARG_LAYOUT_RES_ID = "layoutResId";
+
     private int layoutResId;
 
     public AppIntroSampleSlider() {
@@ -23,7 +23,7 @@ public class AppIntroSampleSlider extends Fragment {
         AppIntroSampleSlider sampleSlide = new AppIntroSampleSlider();
 
         Bundle bundleArgs = new Bundle();
-        bundleArgs.putInt(ARG_LAYOUT_RES_ID, layoutResId);
+        bundleArgs.putInt(Constants.ARG_LAYOUT_RES_ID, layoutResId);
         sampleSlide.setArguments(bundleArgs);
 
         return sampleSlide;
@@ -33,8 +33,8 @@ public class AppIntroSampleSlider extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null && getArguments().containsKey(ARG_LAYOUT_RES_ID))
-            layoutResId = getArguments().getInt(ARG_LAYOUT_RES_ID);
+        if (getArguments() != null && getArguments().containsKey(Constants.ARG_LAYOUT_RES_ID))
+            layoutResId = getArguments().getInt(Constants.ARG_LAYOUT_RES_ID);
     }
 
     @Nullable
